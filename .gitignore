@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# config files
+config/
+
+# Bundle files react
+public/bundle.js
