@@ -1,0 +1,15 @@
+.login-container{
+  background-color: $white-grey;
+  padding: 5rem;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 10rem;
+
+  -webkit-box-shadow: 0px 0px 13px 13px rgba(56, 64, 236, 0.45);
+  -moz-box-shadow:    0px 0px 13px 13px rgba(56, 64, 236, 0.45);
+  box-shadow:         0px 0px 13px 13px rgba(56, 64, 236, 0.45);
+
+  .row {
+    margin-top: 2rem;
+  }
+}

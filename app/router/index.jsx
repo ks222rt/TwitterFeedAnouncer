@@ -1,6 +1,7 @@
 import React from 'react';
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
-import TestApp from 'test';
+import Login from 'Login';
+import {TwitterApp} from 'TwitterApp';
 
 var requireLogin = (nextState, replace, next) => {
   // Change to another login function
@@ -24,7 +25,8 @@ var redirectIfLoggedIn = (nextState, replace, next) => {
 export default (
   <Router history={hashHistory}>
     <Route path="/">
-      <IndexRoute component={TestApp} />
+      <Route path="main" component={TwitterApp} onEnter={requireLogin} />
+      <IndexRoute component={Login} onEnter={redirectIfLoggedIn} />
     </Route>
   </Router>
 );
