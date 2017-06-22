@@ -9,8 +9,12 @@ export class Login extends Component {
   }
 
   onLogin() {
-    console.log(this.props);
-    this.props.login(123);
+    const test = this.props.login(true);
+    this.props.startLogin(true).then((response) => {
+      this.context.router.push('/main');
+    }).catch((error) => {
+      console.log(error);
+    });    
   }
 
   render() {
@@ -28,5 +32,9 @@ export class Login extends Component {
     );
   }
 }
+
+Login.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};
 
 export default connect((state) => ({}), Login);

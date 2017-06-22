@@ -1,9 +1,9 @@
 // Create and export actions
 
-export const login = (uid) => {
+export const login = (loggedIn) => {
   return {
     type: 'LOGIN',
-    uid
+    loggedIn
   };
 };
 
@@ -12,3 +12,18 @@ export const logout = () => {
     type: 'LOGOUT'
   };
 };
+
+export const startLogin = () => {
+  return (dispatch, getState) => {
+    const test = getState();
+    return new Promise((resolve, reject) => {
+      if(test){
+        setTimeout(function(){
+          resolve(test);
+        }, 2500);
+      }else {
+        reject('Error');
+      }
+    });
+  }
+}
