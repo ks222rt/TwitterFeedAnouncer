@@ -7,6 +7,7 @@ import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 // Import components
 import Login from 'Login';
 import {TwitterApp} from 'TwitterApp';
+import {TwitterLoginValidation} from 'TwitterLoginValidation'
 
 // Import and instantiate internal classes
 var store = require('configureStore').configure();
@@ -58,6 +59,7 @@ ReactDOM.render(
     <Router history={hashHistory}>
       <Route path="/">
         <Route path="main" component={TwitterApp} onEnter={requireLogin} />
+        <Route path="twitter/authentication/callback" component={TwitterLoginValidation} />
         <IndexRoute component={Login} onEnter={redirectIfLoggedIn} />
       </Route>
     </Router>

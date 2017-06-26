@@ -11,6 +11,7 @@
   "author": "Kristoffer Svensson",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-core": "^6.5.1",
     "babel-loader": "^6.2.2",
     "babel-preset-es2015": "^6.5.0",
@@ -38,6 +39,7 @@
     "webpack": "^1.12.13"
   },
   "devDependencies": {
+    "cors": "^2.8.3",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.2",
     "karma-mocha": "^0.2.2",

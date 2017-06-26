@@ -1,11 +1,19 @@
-export const test = (test) => {
+import axios from 'axios';
+
+export const fetch_request_token = (callback_url) => {
   return new Promise((resolve, reject) => {
-      if(test){
-        setTimeout(function(){
-          resolve(test);
-        }, 2500);
-      }else {
-        reject('Error');
-      }
+      axios({
+        method: 'post',
+        url: 'https://api.twitter.com/oauth/request_token',
+        contentType: 'text/plain',
+        data: {
+          oauth_callback: callback_url
+        }
+      }).then((response) => {
+        console.log('Fått tillbaka respons på steg 1');
+        console.log(response);
+      }).catch((error) => {
+        console.log(error);
+      })
     });
 }
