@@ -19,7 +19,7 @@ export const startLogin = () => {
   return (dispatch, getState) => {
     const test = getState();
     console.log(TwitterApi);
-    TwitterApi.fetch_request_token(' http://twitter-feed-anouncer.herokuapp.com/#/twitter/authentication/callback')
+    TwitterApi.fetch_request_token('http://twitter-feed-anouncer.herokuapp.com/#/twitter/authentication/callback')
       .then((response) => {
         console.log(response);
       }).catch((error) => {
