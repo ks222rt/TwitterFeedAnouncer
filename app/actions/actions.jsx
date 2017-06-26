@@ -1,3 +1,5 @@
+import * as TwitterApi from '../api/TwitterApi.js';
+
 // Create and export actions
 
 export const login = (loggedIn) => {
@@ -16,14 +18,12 @@ export const logout = () => {
 export const startLogin = () => {
   return (dispatch, getState) => {
     const test = getState();
-    return new Promise((resolve, reject) => {
-      if(test){
-        setTimeout(function(){
-          resolve(test);
-        }, 2500);
-      }else {
-        reject('Error');
-      }
-    });
+    console.log(TwitterApi);
+    TwitterApi.test(test)
+      .then((response) => {
+        console.log(response);
+      }).catch((error) => {
+        console.log(error);
+      });
   }
 }

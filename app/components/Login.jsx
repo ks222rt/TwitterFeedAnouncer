@@ -10,11 +10,7 @@ export class Login extends Component {
 
   onLogin() {
     const test = this.props.login(true);
-    this.props.startLogin(true).then((response) => {
-      this.context.router.push('/main');
-    }).catch((error) => {
-      console.log(error);
-    });    
+    this.props.startLogin(true);
   }
 
   render() {
