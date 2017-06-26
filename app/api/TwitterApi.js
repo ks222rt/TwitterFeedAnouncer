@@ -5,10 +5,7 @@ export const fetch_request_token = (callback_url) => {
       axios({
         method: 'post',
         url: 'https://api.twitter.com/oauth/request_token',
-        headers: {
-          
-        },
-        params: {
+        Authorization: {
           oauth_callback: callback_url
         }
       }).then((response) => {
