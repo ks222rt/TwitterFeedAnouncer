@@ -6,7 +6,7 @@ export const fetch_request_token = (callback_url) => {
         method: 'post',
         url: 'https://api.twitter.com/oauth/request_token',
         contentType: 'text/plain',
-        headers: {
+        params: {
           oauth_callback: callback_url
         }
       }).then((response) => {
