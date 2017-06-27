@@ -10,5 +10,4 @@ function mapDispatchToProps(dispatch) {
 export default (stateToProps, Element) => 
   connect(
     stateToProps, 
-    mapDispatchToProps
-)(Element);
+    mapDispatchToProps)(Element);

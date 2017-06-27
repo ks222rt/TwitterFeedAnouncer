@@ -31,7 +31,9 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        API_CALLBACK_URL: JSON.stringify(process.env.API_CALLBACK_URL)
+        CALLBACK_URL: JSON.stringify(process.env.CALLBACK_URL),
+        CONSUMER_KEY: JSON.stringify(process.env.CONSUMER_KEY),
+        CONSUMER_SECRET: JSON.stringify(process.env.CONSUMER_SECRET)
       }
     })
   ],
@@ -64,6 +66,10 @@ module.exports = {
         },
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   },
@@ -71,6 +77,11 @@ module.exports = {
     includePaths: [
       path.resolve(__dirname, './node_modules/foundation-sites/scss')
     ]
+  },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   },
   devtool: process.env.NODE_ENV === 'production' ? undefined : 'cheap-module-eval-source-map'
 };

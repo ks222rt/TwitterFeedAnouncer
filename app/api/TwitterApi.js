@@ -1,18 +1,13 @@
+"use strict";
 import axios from 'axios';
 
-export const fetch_request_token = (callback_url) => {
+export const fetch_request_token = () => {
   return new Promise((resolve, reject) => {
-      axios({
-        method: 'post',
-        url: 'https://api.twitter.com/oauth/request_token',
-        Authorization: {
-          oauth_callback: callback_url
-        }
-      }).then((response) => {
-        console.log('Fått tillbaka respons på steg 1');
-        console.log(response);
-      }).catch((error) => {
-        console.log(error);
-      })
+      axios.get('/twitter/get-request-token')
+        .then((response) => {
+          resolve(response);
+        }).catch((error) => {
+          reject(error);
+        });
     });
-}
+};

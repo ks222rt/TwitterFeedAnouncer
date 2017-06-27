@@ -17,13 +17,11 @@ export const logout = () => {
 
 export const startLogin = () => {
   return (dispatch, getState) => {
-    const test = getState();
-    console.log(TwitterApi);
-    TwitterApi.fetch_request_token('http://twitter-feed-anouncer.herokuapp.com/#/twitter/authentication/callback')
+    return TwitterApi.fetch_request_token()
       .then((response) => {
-        console.log(response);
+        return response.request.response;
       }).catch((error) => {
-        console.log(error);
+        throw new Error(error);
       });
-  }
-}
+  };
+};
