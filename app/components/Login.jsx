@@ -9,7 +9,7 @@ export class Login extends Component {
   }
 
   onLogin() {
-    const test = this.props.login(true);
+    //const test = this.props.login(true);
     this.props.startLogin(true)
       .then((res) => {
         console.log(res);

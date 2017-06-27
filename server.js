@@ -8,6 +8,14 @@ var clientSessions = require("client-sessions");
 var app = express();
 const PORT = process.env.PORT || 3000;
 
+var twitter = new Twitter({
+    consumerKey: config.CONSUMER_KEY,
+    consumerSecret: config.CONSUMER_SECRET,
+    callback: config.CALLBACK_URL
+});
+
+var _requestSecret = undefined;
+
 app.use(cors());
 app.use(function (req, res, next){
   if (req.headers['x-forwarded-proto'] === 'https') {
@@ -27,26 +35,22 @@ app.use(clientSessions({
 }));
 
 app.get('/twitter/get-request-token', function(req, res) {
-  var twitter = new Twitter({
-    consumerKey: config.CONSUMER_KEY,
-    consumerSecret: config.CONSUMER_SECRET,
-    callback: config.CALLBACK_URL
-  });
 
   twitter.getRequestToken((err, requestToken, requestSecret) => {
         if(err) {
-          console.log(err);
           res.status(500).send(err);
         }else{
-          var requestObject = {
-            request_token: requestToken,
-            request_secret: requestSecret
-          }
-
-          req.theSession.loggedIn = true;
-          res.send(requestObject);
+          _requestSecret = requestSecret;
+          res.redirect(301, "https://api.twitter.com/oauth/authenticate?oauth_token=" + requestToken);
         }
       });
+});
+
+app.get('/twitter/authentication/callback', function(req, err) {
+  var requestToken = req.query.oauth_token,
+      verifier = req.query.oauth_verifier;
+  console.log(requestToken);
+  console.log(verifier);
 });
 
 /* Check if session isset */

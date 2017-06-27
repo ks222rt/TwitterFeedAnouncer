@@ -18,10 +18,10 @@ export const logout = () => {
 export const startLogin = () => {
   return (dispatch, getState) => {
     return TwitterApi.fetch_request_token()
-      .then((response) => {
-        return response.request.response;
-      }).catch((error) => {
-        throw new Error(error);
-      });
+        .then((response) => {
+          console.log(response);
+        }).catch((error) => {
+          console.log(error);
+        });
   };
 };
