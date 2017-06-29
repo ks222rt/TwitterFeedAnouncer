@@ -9,7 +9,6 @@ import {TwitterLoginValidation} from 'TwitterLoginValidation'
 
 // Middleware function to verify logged in user
 var requireLogin = (nextState, replace, next) => {
-
   SessionApi.is_session_set().then((res) => {
     if(res === false) {
       replace('/');
@@ -20,7 +19,6 @@ var requireLogin = (nextState, replace, next) => {
 
 // Middleware function to verify if user is already logged in
 var redirectIfLoggedIn = (nextState, replace, next) => {
-
     SessionApi.is_session_set().then((res) => {
       if(res === true) {
         replace('/main');
@@ -35,7 +33,7 @@ export default (
   <Router history={hashHistory}>
       <Route path="/">
         <Route path="main" component={TwitterApp} onEnter={requireLogin} />
-        <Route path="twitter/authentication/callback" component={TwitterLoginValidation} />
+        <Route path="check/twitter/authentication" component={TwitterLoginValidation} />
         <IndexRoute component={Login} onEnter={redirectIfLoggedIn} />
       </Route>
     </Router>

@@ -19,6 +19,7 @@ export const startLogin = () => {
   return (dispatch, getState) => {
     return TwitterApi.fetch_request_token()
         .then((response) => {
+          console.log('Actions.jsx');
           console.log(response);
         }).catch((error) => {
           console.log(error);

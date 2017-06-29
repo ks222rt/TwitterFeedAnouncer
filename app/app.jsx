@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {Route, Router, IndexRoute, hashHistory} from 'react-router';
+
 //import * as TwitterApi from './api/TwitterApi.js';
 import router from 'app/router/';
 
