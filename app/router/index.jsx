@@ -9,22 +9,27 @@ import {TwitterLoginValidation} from 'TwitterLoginValidation'
 
 // Middleware function to verify logged in user
 var requireLogin = (nextState, replace, next) => {
-  SessionApi.is_session_set().then((res) => {
-    if(res === false) {
-      replace('/');
-    }
-    next();
-  });
+  SessionApi.is_session_set()
+    .then((res) => {
+      if(res.loggedIn === false) {
+        replace('/');
+      }
+      next();
+    }).catch((err) => {
+      console.log(err);
+    });
 };
 
 // Middleware function to verify if user is already logged in
 var redirectIfLoggedIn = (nextState, replace, next) => {
-    SessionApi.is_session_set().then((res) => {
-      if(res === true) {
-        replace('/main');
-      }
-
-      next();
+    SessionApi.is_session_set().
+      then((res) => {
+        if(res.loggedIn === true) {
+          replace('/main');
+        }
+        next();
+    }).catch((err) => {
+      console.log(err);
     });
 
 };

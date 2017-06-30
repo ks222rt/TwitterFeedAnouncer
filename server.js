@@ -18,14 +18,6 @@ var twitter = new Twitter({
 var _requestSecret = undefined;
 
 app.use(cors());
-/*app.all('*', function(req, res, next) {
-  console.log('Trying to reach: ' + req.originalUrl);
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-  res.header('Access-Control-Max-Age', '1000');
-  res.header('Access-Control-Allow-Headers', 'x-requested-with, Content-Type, origin, authorization, accept, client-security-token');
-  next();
-});*/
 
 app.use(function (req, res, next){
   if (req.headers['x-forwarded-proto'] === 'https') {
@@ -45,21 +37,21 @@ app.use(clientSessions({
   }
 }));
 
+/* Initiate twitter login request */
 app.get('/twitter/get-request-token', function(req, res) {
   twitter.getRequestToken((err, requestToken, requestSecret) => {
         if(err) {
           res.status(500).send(err);
-        }else{
-          //_requestSecret = requestSecret;
+        }else {
           req.theSession.requestSecret = requestSecret;
           var data = JSON.stringify("https://api.twitter.com/oauth/authenticate?oauth_token=" + requestToken);
           res.header('Content-Length', data.length);
           res.send(data);
-          //res.redirect("https://api.twitter.com/oauth/authenticate?oauth_token=" + requestToken);
         }
       });
 });
 
+/* Twitter callback function to verify user */
 app.get('/twitter/authentication/callback', function(req, res) {
   var requestToken = req.query.oauth_token,
       verifier = req.query.oauth_verifier,
@@ -70,6 +62,8 @@ app.get('/twitter/authentication/callback', function(req, res) {
     if(err) {
       res.status(500).send(err);
     }else {
+      req.theSession.accessToken = accessToken;
+      req.theSession.accessSecret = accessSecret;
       twitter.verifyCredentials(accessToken, accessSecret, (err, user) => {
         if(err) {
           res.status(500).send(err);
@@ -83,12 +77,33 @@ app.get('/twitter/authentication/callback', function(req, res) {
   });
 });
 
+/* Get tweets from homeline */
+app.get('/twitter/get-user-homeline', function(req, res) {
+  var params = {};
+  twitter.getTimeline('home_timeline', params, req.theSession.accessToken, req.theSession.accessSecret, (err, data, response) => {
+      if(err) {
+        res.status(500).send(err);
+      }else {
+        console.log(data);
+        console.log(response);
+      }
+  });
+});
+
 /* Check if session isset */
 app.get('/check/valid/session', function(req, res) {
   if(req.theSession.loggedIn === undefined){
-    res.send(false);
+    var data = JSON.stringify({
+      loggedIn: false,
+      user: undefined
+    })
+    res.send(data);
   }else {
-    res.send(req.theSession.loggedIn);
+    var data = JSON.stringify({
+      loggedIn: true,
+      user: req.theSession.user
+    })
+    res.send(data);
   }
 });
 

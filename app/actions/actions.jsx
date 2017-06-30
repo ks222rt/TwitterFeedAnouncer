@@ -2,6 +2,7 @@ import * as TwitterApi from '../api/TwitterApi.js';
 
 // Create and export actions
 
+// Login reducers
 export const login = (loggedIn) => {
   return {
     type: 'LOGIN',
@@ -24,5 +25,12 @@ export const startLogin = () => {
         }).catch((error) => {
           console.log(error);
         });
+  };
+};
+
+// Fetch and add Tweet reducers
+export const startAddTweets = () => {
+  return (dispatch, getState) => {
+    var tweetsRef = TwitterApi.fetch_home_timeline();
   };
 };
