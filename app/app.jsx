@@ -21,8 +21,6 @@ require('style!css!sass!applicationStyles')
 SessionApi.is_session_set()
   .then((response) => {
     if(response.loggedIn === true) {
-      console.log(response);
-      console.log('appen start');
       store.dispatch(actions.login(response.user.id));
       store.dispatch(actions.startAddTweets());
       hashHistory.push('/main');

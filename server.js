@@ -84,8 +84,22 @@ app.get('/twitter/get-user-homeline', function(req, res) {
       if(err) {
         res.status(500).send(err);
       }else {
-        console.log(data);
-        console.log(response);
+        if(response.statusCode === 200) {
+          var data = JSON.stringify({
+            tweetArray: data,
+            status: 200,
+            message: 'Data was fetched correctly'
+          });
+          
+        }else {
+          var data = JSON.stringify({
+            tweetArray: undefined,
+            status: 404,
+            message: 'Could not fetch data'
+          });
+        } 
+
+        res.send(data);
       }
   });
 });

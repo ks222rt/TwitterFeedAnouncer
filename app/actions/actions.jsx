@@ -31,6 +31,29 @@ export const startLogin = () => {
 // Fetch and add Tweet reducers
 export const startAddTweets = () => {
   return (dispatch, getState) => {
-    var tweetsRef = TwitterApi.fetch_home_timeline();
+    TwitterApi.fetch_home_timeline()
+      .then((response) => {
+        var tweets = response.data.tweetArray;
+        var parsedTweets = [];
+
+        Object.keys(tweets).forEach((tweetID) => {
+          parsedTweets.push({
+            id: tweetID,
+            ...tweets[tweetID]
+          });
+        });
+        dispatch(addTweets(parsedTweets));
+        
+      }).catch((error) => {
+        console.log(error.message);
+      });
+  
   };
 };
+
+export const addTweets = (tweets) => {
+  return {
+    type: 'ADD_TWEETS',
+    tweets
+  };
+};  
