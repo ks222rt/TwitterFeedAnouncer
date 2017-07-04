@@ -45,7 +45,7 @@ export const startAddTweets = () => {
         dispatch(addTweets(parsedTweets));
         
       }).catch((error) => {
-        console.log(error.message);
+        console.log(error);
       });
   
   };
