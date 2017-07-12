@@ -8,7 +8,7 @@ export class TwitterLoginValidation extends Component{
   }
 
   componentWillMount() {
-    console.log('Allt lyckades');
+    console.log('Succesfully authenticated to twitter!');
     hashHistory.push('/main');
   }
 

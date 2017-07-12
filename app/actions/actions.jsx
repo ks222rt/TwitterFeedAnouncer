@@ -1,4 +1,5 @@
 import * as TwitterApi from '../api/TwitterApi.js';
+import * as SessionApi from '../api/SessionApi.js';
 
 // Create and export actions
 
@@ -20,12 +21,24 @@ export const startLogin = () => {
   return (dispatch, getState) => {
     return TwitterApi.fetch_request_token()
         .then((response) => {
-          console.log('Actions.jsx');
-          console.log(response);
+          console.log('Succesfully logged in!', response);
         }).catch((error) => {
-          console.log(error);
+          console.log('Unable to login', error);
         });
   };
+};
+
+export const startLogout = () => {
+  return (dispatch, getState) => {
+    return SessionApi.logout_and_unset_session()
+      .then((response) => {
+        console.log('Logout succesfully');
+        return response.data;
+      }).catch((error) => {
+        console.log('Unable to logout');
+        return error.data;
+      });
+  }
 };
 
 // Fetch and add Tweet reducers

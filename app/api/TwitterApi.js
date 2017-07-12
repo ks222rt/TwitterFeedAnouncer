@@ -15,6 +15,7 @@ export const fetch_request_token = () => {
 export const fetch_home_timeline = () => {
   return axios.get('/twitter/get-user-homeline')
       .then((response) => {
+        console.log(response);
         return response;
       }).catch((error) => {
         return response;

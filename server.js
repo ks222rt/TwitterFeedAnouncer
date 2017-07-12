@@ -121,6 +121,23 @@ app.get('/check/valid/session', function(req, res) {
   }
 });
 
+app.get('/logout/unset/session', function(req, res) {
+  if(req.theSession.loggedIn === true){
+    var data = JSON.stringify({
+      loggedOut: true,
+      message: 'You were logged out'
+    });
+    req.theSession.reset();
+    res.send(data);
+  }else {
+    var data = JSON.stringify({
+      loggedOut: false,
+      message: 'Something happend, you were not logged out'
+    });
+    res.send(data);
+  }
+});
+
 app.use(express.static(__dirname + '/public'));
 
 app.listen(PORT, function () {

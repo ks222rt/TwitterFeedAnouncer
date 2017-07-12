@@ -4,7 +4,7 @@ import * as SessionApi from '../api/SessionApi.js';
 
 // Import components
 import Login from 'Login';
-import {TwitterApp} from 'TwitterApp';
+import TwitterApp from 'TwitterApp';
 import {TwitterLoginValidation} from 'TwitterLoginValidation'
 
 // Middleware function to verify logged in user

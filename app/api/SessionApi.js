@@ -10,3 +10,11 @@ export const is_session_set = () => {
     });
 };
 
+export const logout_and_unset_session = () => {
+  return axios.get('/logout/unset/session')
+    .then((res) => {
+      return res;
+    }).catch((err) => {
+      return err;
+    });
+};
