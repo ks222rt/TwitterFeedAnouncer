@@ -7,10 +7,11 @@ export class Tweet extends Component {
   }
 
   render() {
-    var {id, text} = this.props;
+    var {id, text, user} = this.props;
 
     return (
-        <div>
+        <div className="tweet-card">
+          <h1>{user.name}</h1>
           <p>{id}</p>
           <p>{text}</p>
         </div>

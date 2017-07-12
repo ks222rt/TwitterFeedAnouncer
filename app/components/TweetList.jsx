@@ -25,9 +25,9 @@ export class TweetList extends Component {
     }
 
     return(
-    <div>
-      {renderTweets()}
-    </div>
+      <div className="tweet-container">
+        {renderTweets()}
+      </div>
     )
   }
 };
