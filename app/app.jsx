@@ -21,6 +21,7 @@ require('style!css!sass!applicationStyles')
 SessionApi.is_session_set()
   .then((response) => {
     if(response.loggedIn === true) {
+      console.log(store.getState());
       store.dispatch(actions.login(response.user.id));
       store.dispatch(actions.startAddTweets());
       hashHistory.push('/main');
@@ -29,7 +30,7 @@ SessionApi.is_session_set()
       hashHistory.push('/');
     }
   }).catch((error) => {
-
+    console.log('Something happend with the request');
   });
 
 ReactDOM.render(

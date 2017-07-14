@@ -37,7 +37,6 @@ export class TwitterApp extends Component{
           <TweetList/>
         </div>
         
-        <div>Hello darkness, my old friend!</div>
       </div>
     )
   }
