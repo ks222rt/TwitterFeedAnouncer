@@ -1,8 +1,11 @@
 .tweet-card {
-  border-width: 1px;
-  border-color: $tweet-card-border-color;
+  background-color: white;
   height: 150px;
   padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  border-style: groove;
+  border-color: $tweet-container-background-color;
 
   .tweet-card-header{
         
