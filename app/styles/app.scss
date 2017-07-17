@@ -9,11 +9,13 @@
 @import "components/login-container";
 @import "components/tweet-container";
 @import "components/tweet-card";
+@import "components/userprofile";
 
 
 html {
     overflow: scroll;
     overflow-x: hidden;
+    padding-top: 2%; 
 }
 ::-webkit-scrollbar {
     width: 0px;  /* remove scrollbar space */
@@ -22,4 +24,10 @@ html {
 /* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
     background: #FF0000;
+}
+
+.application-header {
+    font-size: 40px;
+    font-family: cursive;
+    text-align: center;
 }

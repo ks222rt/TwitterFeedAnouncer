@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {hashHistory} from 'react-router';
 import TweetList from 'TweetList';
+import UserProfile from 'UserProfile';
 import connect from '../connect';
 
 export class TwitterApp extends Component{
@@ -8,33 +8,14 @@ export class TwitterApp extends Component{
     super(props);
   }
 
-  onLogout(event) {
-    event.preventDefault();
-  
-    this.props.startLogout()
-      .then((response) => {
-        if(response.loggedOut) {
-          console.log(response.message);
-          hashHistory.push('/');
-        }else {
-          console.log(response.message);
-        }
-      }).catch((error) => {
-        console.log(errror);
-      });
-  }
-
   render() {
     return(
       <div>
-        <div>
-            <a href="#" onClick={this.onLogout.bind(this)}>Logout</a>
-        </div>
-
-        <h1>Welcome to Heaven, the lazy way to read the homeline!</h1>
+        <h1 className="application-header">Welcome to Heaven, the lazy way to read the homeline!</h1>
 
         <div>
           <TweetList/>
+          <UserProfile/>
         </div>
         
       </div>

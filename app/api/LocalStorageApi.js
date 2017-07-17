@@ -37,10 +37,11 @@ export const verifyStoredTweets = () => {
         if (oldTime.amountOfRequests < MAX_AMOUNT_OF_REQUESTS) {
           return false;
         }
+      } else {
+        return false;
       }
     }
   }
-
   return true;
 };
 
