@@ -7,6 +7,7 @@ import {hashHistory} from 'react-router';
 //import * as TwitterApi from './api/TwitterApi.js';
 import router from 'app/router/';
 import * as SessionApi from './api/SessionApi.js';
+import * as LocalStorageApi from './api/LocalStorageApi.js';
 import * as actions from 'actions';
 
 // Import and instantiate internal classes
@@ -20,10 +21,14 @@ require('style!css!sass!applicationStyles')
 
 SessionApi.is_session_set()
   .then((response) => {
-    if(response.loggedIn === true) {
-      console.log(store.getState());
+    if (response.loggedIn === true) {
+      if (LocalStorageApi.verifyStoredTweets()) {
+        var tweets = LocalStorageApi.fetchStoredTweets();
+        store.dispatch(actions.addStoredTweets(tweets));
+      } else {
+        store.dispatch(actions.startAddTweets());
+      }
       store.dispatch(actions.login(response.user.id));
-      store.dispatch(actions.startAddTweets());
       hashHistory.push('/main');
     }else{
       store.dispatch(actions.logout());

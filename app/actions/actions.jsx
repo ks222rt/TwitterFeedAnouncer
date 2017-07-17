@@ -1,5 +1,7 @@
+"use strict";
 import * as TwitterApi from '../api/TwitterApi.js';
 import * as SessionApi from '../api/SessionApi.js';
+import * as LocalStorageApi from '../api/LocalStorageApi.js';
 
 // Create and export actions
 
@@ -56,11 +58,26 @@ export const startAddTweets = () => {
           });
         });
         dispatch(addTweets(parsedTweets));
-        
+        LocalStorageApi.storeTweets(parsedTweets);
       }).catch((error) => {
         console.log(error);
       });
   
+  };
+};
+
+// Adds tweets from localstorage to redux state
+export const addStoredTweets = (Tweets) => {
+  return (dispatch, getState) => {
+    var parsedTweets = [];
+
+    Object.keys(Tweets).forEach((tweetID) => {
+      parsedTweets.push({
+        id: tweetID,
+        ...Tweets[tweetID]
+      });
+    });
+    dispatch(addTweets(parsedTweets));
   };
 };
 
